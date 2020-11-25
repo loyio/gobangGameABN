@@ -19,7 +19,7 @@ pygame.display.set_caption('五子棋AI对战')
 screen = pygame.display.set_mode((600, 600))
 
 DEPTH = 3
-ATK_RATIO = 1
+ATK_RATIO = 1  # 攻击系数
 
 listCPU = []
 listSelf = []
@@ -35,10 +35,15 @@ for i in range(cell_num + 1):
         tableListAll.append((i, j))
 
 perfectNext = [0, 0]
-game_state = 1  # 游戏状态1.表示正常进行 2.表示黑胜 3.表示白胜
+game_state = 1
 
 
 def cpuAI(inFirst):
+    """
+    电脑运算主程序
+    :param inFirst:是否是先手
+    :return:最佳候选坐标
+    """
     if inFirst:
         perfectNext[0] = random.randint(6, 8)
         perfectNext[1] = random.randint(6, 8)
@@ -55,6 +60,14 @@ def cpuAI(inFirst):
 
 
 def abnAlgo(depth, alpha_value, beta_value, is_computer):
+    """
+    负极大值搜索，alpha-beta 剪枝 主算法
+    :param depth: 遍历深度
+    :param alpha_value:alpha的值，初始时为负无穷大
+    :param beta_value:beta的值，初始时为无穷大
+    :param is_computer:是否是电脑方
+    :return:alpha_value
+    """
     if checkWin(listCPU) or checkWin(listSelf) or depth == 0:
         return evaluation(is_computer)
 
@@ -95,10 +108,15 @@ def abnAlgo(depth, alpha_value, beta_value, is_computer):
     return alpha_value
 
 
-def evaluation(is_ai):
+def evaluation(is_computer):
+    """
+    评估函数
+    :param is_computer: 是否是电脑方
+    :return:总评分
+    """
     total_score = 0
 
-    if is_ai:
+    if is_computer:
         self_list = listCPU
         rival_list = listSelf
     else:
@@ -127,7 +145,7 @@ def evaluation(is_ai):
         enemy_score += calcScore(m, n, 1, 1, self_list, rival_list, score_all_arr_enemy)
         enemy_score += calcScore(m, n, -1, 1, self_list, rival_list, score_all_arr_enemy)
 
-    total_score = my_score - enemy_score * ATK_RATIO * 0.1
+    total_score = my_score - enemy_score * ATK_RATIO
 
     return total_score
 

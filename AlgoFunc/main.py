@@ -82,7 +82,6 @@ def calcScore(m, n, directionX, directionY, rivalList, selfList, allScoreList):
                 return 0
 
     for offset in range(-5, 1):
-        # offset = -2
         pos = []
         for i in range(0, 6):
             if (m + (i + offset) * directionX, n + (i + offset) * directionY) in rivalList:
@@ -96,7 +95,6 @@ def calcScore(m, n, directionX, directionY, rivalList, selfList, allScoreList):
 
         for (score, shape) in shape_score:
             if tmp_shap5 == shape or tmp_shap6 == shape:
-
                 if score > max_score_shape[0]:
                     max_score_shape = (score, ((m + (0 + offset) * directionX, n + (0 + offset) * directionY),
                                                (m + (1 + offset) * directionX, n + (1 + offset) * directionY),

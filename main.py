@@ -15,7 +15,7 @@ space = 50  # 左边距
 cell_size = 35.7  # 每个格子大小
 cell_num = 15
 
-pygame.display.set_caption('五子棋AI对战')
+pygame.display.set_caption('五子棋人机对战')
 screen = pygame.display.set_mode((600, 600))
 
 DEPTH = 3

@@ -2,6 +2,8 @@
 
 使用负值最大算法，alpha-beta剪枝算法实现的五子棋AI程序
 
+代码仓库[https://github.com/loyio/gobangGameABN](https://github.com/loyio/gobangGameABN)
+
 
 
 #### 1.前言

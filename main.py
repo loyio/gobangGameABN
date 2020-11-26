@@ -18,7 +18,7 @@ cell_num = 15
 pygame.display.set_caption('五子棋人机对战')
 screen = pygame.display.set_mode((600, 600))
 
-DEPTH = 3
+DEPTH = 4
 ATK_RATIO = 1  # 攻击系数
 
 listCPU = []
@@ -27,6 +27,7 @@ listAll = []
 listBlit = []
 
 tableListAll = []
+
 
 flag = 1
 
@@ -145,7 +146,7 @@ def evaluation(is_computer):
         enemy_score += calcScore(m, n, 1, 1, self_list, rival_list, score_all_arr_enemy)
         enemy_score += calcScore(m, n, -1, 1, self_list, rival_list, score_all_arr_enemy)
 
-    total_score = my_score - enemy_score * ATK_RATIO
+    total_score = my_score - enemy_score * ATK_RATIO * 0.1
 
     return total_score
 

@@ -4,6 +4,33 @@
  @Date: 2020/11/14
 """
 
+shape_score = []
+
+
+def load_model(path):
+    """
+    加载棋型模块
+    :param path:路径
+    :return: 棋型列表
+    """
+    shape_score = []
+    with open(path, 'r') as f:
+        while True:
+            line = f.readline()
+            if not line:
+                break
+            res_line = line.split(' ')
+            line_list = []
+            shape_list = []
+            for i in range(1, len(res_line)):
+                shape_list.append(int(res_line[i]))
+            line_list.append(int(res_line[0]))
+            line_list.append(shape_list)
+            shape_score.append(line_list)
+
+    return shape_score
+
+
 # 分数形状
 shape_score = [(50, (0, 1, 1, 0, 0)),
                (50, (0, 0, 1, 1, 0)),
@@ -29,7 +56,7 @@ def checkFull(cell_num, chess_list):
     :param chess_list:总填子列表
     :return:Ture or False
     """
-    if len(chess_list) >= cell_num*cell_num:
+    if len(chess_list) >= cell_num * cell_num:
         return True
     else:
         return False
@@ -50,13 +77,13 @@ def checkWin(chess_list):
                     m, n + 3) in chess_list and (m, n + 4) in chess_list:
                 return True
             elif m < ROW - 4 and (m, n) in chess_list and (m + 1, n) in chess_list and (m + 2, n) in chess_list and (
-                        m + 3, n) in chess_list and (m + 4, n) in chess_list:
+                    m + 3, n) in chess_list and (m + 4, n) in chess_list:
                 return True
             elif m < ROW - 4 and n < ROW - 4 and (m, n) in chess_list and (m + 1, n + 1) in chess_list and (
-                        m + 2, n + 2) in chess_list and (m + 3, n + 3) in chess_list and (m + 4, n + 4) in chess_list:
+                    m + 2, n + 2) in chess_list and (m + 3, n + 3) in chess_list and (m + 4, n + 4) in chess_list:
                 return True
             elif m < ROW - 4 and n > 3 and (m, n) in chess_list and (m + 1, n - 1) in chess_list and (
-                        m + 2, n - 2) in chess_list and (m + 3, n - 3) in chess_list and (m + 4, n - 4) in chess_list:
+                    m + 2, n - 2) in chess_list and (m + 3, n - 3) in chess_list and (m + 4, n - 4) in chess_list:
                 return True
     return False
 

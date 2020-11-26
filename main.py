@@ -18,7 +18,7 @@ cell_num = 15
 pygame.display.set_caption('五子棋人机对战')
 screen = pygame.display.set_mode((600, 600))
 
-DEPTH = 4
+DEPTH = 3
 ATK_RATIO = 1  # 攻击系数
 
 listCPU = []

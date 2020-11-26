@@ -16,7 +16,7 @@
 
 :three:数据结构实现太过简陋，浪费了太多的系统资源
 
-后面我又通过查询资料，基本弄明白了博弈程序几个常用的算法，为了节省设计数据结构的时间（我的C++ STL学的还不是很深入），最终选择使用Python编写这个五子棋算法程序，在界面层渲染事件处理方面我使用的是pygame模块，比较简单，我这里就不过多介绍。
+后面我又通过查询资料，基本弄明白了博弈程序几个常用的算法，为了节省设计数据结构的时间（我的C++ STL学的还不是很深入），最终选择使用Python编写这个五子棋算法程序，在界面层渲染事件处理方面我使用的是pygame模块，比较简单，我的文档就不过多介绍。
 
 ![image-20201126101244354](https://loyioblog.oss-cn-beijing.aliyuncs.com/2020-11-26-021703.png)
 
@@ -216,12 +216,12 @@ def evaluation(is_ai):
 
 
 
-##### 3. **$\alpha$-$ \beta$** 剪枝算法（Alpha-beta pruning）（[维基百科](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)）
+##### 3. **$$\alpha$$-$$\beta$$** 剪枝算法（Alpha-beta pruning）（[维基百科](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)）
 
 此算法主要用于裁剪搜索树中不需要搜索的树枝，以提高运算速度，降低时间复杂度，它的基本原理是：
 
-- 当一个MIN节点的 $\beta$ 值 $\le$ 任何一个父节点的 $\alpha$ 值时，剪掉该节点的所有子节点
-- 当一个MAX节点的 $\alpha$ 值 $\ge$ 任何一个父节点的 $\beta$ 值时，剪掉该节点的所有子节点
+- 当一个MIN节点的 $$\beta$$ 值 $\le$ 任何一个父节点的 $$\alpha$$ 值时，剪掉该节点的所有子节点
+- 当一个MAX节点的 $$\alpha$$ 值 $\ge$ 任何一个父节点的 $$\beta$$ 值时，剪掉该节点的所有子节点
 
 下面是来自维基百科的一张示例图
 
@@ -240,8 +240,8 @@ def evaluation(is_ai):
 下面我介绍我的主算法函数`abnAlgo`,这里需要传入搜索深度，alpha的值（初始时为负无穷大），beta的值（初始时为无穷大），最后是当前层是否是电脑方
 
 - 在开始的时候，我们要定义一个递归边界，判断游戏是否结束，当搜索深度为零时或棋盘中有五子连线，直接返回调用评估函数`evaluation()`
-- 然后我们需要得到一个包含棋盘中所有未填子坐标的列表`blank_list`，这里用到了集合的差集，然后对`blank_list`进行搜索顺序排序，提高剪枝的效率
-- 然后我们遍历`blank_list`中每一个候选步，如果要评估的候选步没有相邻的棋子，则不去评估，以此减少计算
+  - 然后我们需要得到一个包含棋盘中所有未填子坐标的列表`blank_list`，这里用到了集合的差集，然后对`blank_list`进行搜索顺序排序，提高剪枝的效率
+  - 然后我们遍历`blank_list`中每一个候选步，如果要评估的候选步没有相邻的棋子，则不去评估，以此减少计算
 - 如果当前层是电脑方，则将该候选步加入到电脑棋子列表（棋子列表都被定义为全局变量），反之则加入到玩家方棋子列表，同时加入到所有已填子列表。
 - 递归调用主算法函数`abnAlgo`，这里的搜索深度减1，参数alpha为负beta，参数beta为负alpha，当前层更改为当前层的对手层，将该函数返回的值的负值保存到变量`value`
 - 递归结束后，将之前加入的候选步移除
@@ -291,4 +291,73 @@ def abnAlgo(depth, alpha_value, beta_value, is_computer):
 
     return alpha_value
 ```
+
+
+
+
+
+
+
+#### 3.缺陷以及优化
+
+##### 1.运算时间复杂度
+
+我在这里使用的数据结构过于简单，而忽略了计算效率，所以4层的计算，通常需要超过1分钟的搜索时间，太费时间了，后面会考虑优化数据结构，缩短搜索时间
+
+然后在搜索的时候，没有使用提高计算效率的数据共享方式，所以在运算时经常出现浪费系统资源，数据结构混乱的情况，有时，因为界面层渲染的原因会导致出现比较严重的bug
+
+这里优化的想法是，先从上一步落子点的周围开始搜索，快速找到最大值和最小值，从而加快剪枝的速度。
+
+
+
+##### 2.算杀
+
+没有添加算杀模块
+
+所谓算杀就是计算出杀棋，杀棋就是指一方通过连续的活三和冲四进行进攻，一直到赢的一种走法。我们一般会把算杀分为连续冲四胜和连续活三胜
+
+多。一般在算杀的时候，我们优先进行连续冲三胜计算，没有找到结果的时候再进行连续冲四胜，因为算杀的情况下，每个节点只计算活三和冲四的子节点。所
+
+以可能同样的时间，搜索只能进行4层，而算杀很多时候可以进行到12层以上。
+
+*为了方便，我们把前面的讲到全面的极大极小值搜索简称为搜索*
+
+而且很容易想到，算杀其实也是一种极大极小值搜索，具体的策略是这样的：
+
+- MAX层，只搜索己方的活三和冲四节点，只要有一个子节点的能赢即可
+- MIN 层，搜索所有的己方和对面的活三和冲四节点（进攻也是防守），只要有一个子节点能保持不败即可。
+
+
+
+
+
+##### 3.学习模块
+
+这里可能需要牵涉到机器学习深度学习方面的内容了，通过编写一些训练程序，使用机器学习库神经网络库（比如TensorFlow、PyTorch、Keras），调用GPU算力，训练生成AI模型，从而提高电脑AI的棋力，不过，这都是后话了，如果对这些感兴趣的话，可以自行查阅资料学习
+
+
+
+
+
+
+
+#### 4.参考资料(特别感谢)
+
+
+
+我的算法代码很多都是借鉴参考以下开源程序的，非常感谢，通过它们的代码让我学习到了很多
+
+
+
+1.javascript gobang AI,五子棋AI设计教程: [https://github.com/lihongxun945/myblog/issues/11](https://github.com/lihongxun945/myblog/issues/11)
+
+2.A Gobang game implemented with C++ and SDL: [https://github.com/tjumyk/Five_SDL](https://github.com/tjumyk/Five_SDL)
+
+3.pygame做一个简单的五子棋游戏: [https://blog.csdn.net/zhangenter/article/details/89078434](https://blog.csdn.net/zhangenter/article/details/89078434)
+
+4.基于博弈树α-β剪枝搜索的五子棋AI: [https://github.com/colingogogo/gobang_AI](https://github.com/colingogogo/gobang_AI)
+
+5.Gobang game with artificial intelligence in 900 Lines !!: [https://github.com/skywind3000/gobang](https://github.com/skywind3000/gobang)
+
+6.An implementation of the AlphaZero algorithm for Gomoku (also called Gobang or Five in a Row)[https://github.com/junxiaosong/AlphaZero_Gomoku](https://github.com/junxiaosong/AlphaZero_Gomoku)
 

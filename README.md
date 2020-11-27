@@ -1,5 +1,9 @@
 # gobangGameABN
 
+
+
+[toc]
+
 使用负值最大算法，alpha-beta剪枝算法实现的五子棋AI程序
 
 代码仓库[https://github.com/loyio/gobangGameABN](https://github.com/loyio/gobangGameABN)
@@ -343,7 +347,15 @@ def abnAlgo(depth, alpha_value, beta_value, is_computer):
 
 
 
-#### 4.参考资料(特别感谢)
+#### 4.总结
+
+我这个五子棋算法终究只是对经典算法的应用与结合，对于一般的不怎么下五子棋的玩家，电脑算法可以比较轻松的战胜玩家，但对于棋艺较高的玩家，这种程序在搜索层数的不高情况下，是无法下赢玩家的。我自己在测试的时候可以做到80%的胜率（我个人五子棋棋艺还算是比较高的），如果想要实现更深层次的算法，可以从上一点的学习模块入手，或参考我下面的给出的链接6
+
+
+
+
+
+#### 5.参考资料(特别感谢)
 
 
 
@@ -362,4 +374,12 @@ def abnAlgo(depth, alpha_value, beta_value, is_computer):
 5.Gobang game with artificial intelligence in 900 Lines !!: [https://github.com/skywind3000/gobang](https://github.com/skywind3000/gobang)
 
 6.An implementation of the AlphaZero algorithm for Gomoku (also called Gobang or Five in a Row)[https://github.com/junxiaosong/AlphaZero_Gomoku](https://github.com/junxiaosong/AlphaZero_Gomoku)
+
+
+
+
+
+
+
+如果有任何关于代码的疑问，可以通过:e-mail:*​i@loyio.me*联系我
 

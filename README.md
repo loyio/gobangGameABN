@@ -1,8 +1,27 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [gobangGameABN](#gobanggameabn)
+      - [1.前言](#1%E5%89%8D%E8%A8%80)
+          - [2.算法介绍](#2%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D)
+        - [1.极大极小值搜索算法（Minimax）（维基百科）](#1%E6%9E%81%E5%A4%A7%E6%9E%81%E5%B0%8F%E5%80%BC%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95minimax%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91)
+        - [2.负极大值算法（Negamax）（维基百科）](#2%E8%B4%9F%E6%9E%81%E5%A4%A7%E5%80%BC%E7%AE%97%E6%B3%95negamax%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91)
+        - [3. **$$\alpha$$-$$\beta$$** 剪枝算法（Alpha-beta pruning）（维基百科）](#3-%5Calpha-%5Cbeta-%E5%89%AA%E6%9E%9D%E7%AE%97%E6%B3%95alpha-beta-pruning%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91)
+          - [3.缺陷以及优化](#3%E7%BC%BA%E9%99%B7%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96)
+        - [1.运算时间复杂度](#1%E8%BF%90%E7%AE%97%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6)
+        - [2.算杀](#2%E7%AE%97%E6%9D%80)
+        - [3.学习模块](#3%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9D%97)
+          - [4.总结](#4%E6%80%BB%E7%BB%93)
+          - [5.参考资料(特别感谢)](#5%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E7%89%B9%E5%88%AB%E6%84%9F%E8%B0%A2)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # gobangGameABN
 
 
 
-[toc]
+
 
 使用负值最大算法，alpha-beta剪枝算法实现的五子棋AI程序
 

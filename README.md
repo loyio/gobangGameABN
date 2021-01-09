@@ -1,22 +1,23 @@
-# gobangGameABN
 
-<!--ts-->
-   * [gobangGameABN](#gobanggameabn)
-            * [1.前言](#1\xE5\x89\x8D\xE8\xA8\x80)
-            * [2.算法介绍](#2\xE7\xAE\x97\xE6\xB3\x95\xE4\xBB\x8B\xE7\xBB\x8D)
-               * [1.极大极小值搜索算法（Minimax）（<a href="https://en.wikipedia.org/wiki/Minimax" rel="nofollow">维基百科</a>）](#1\xE6\x9E\x81\xE5\xA4\xA7\xE6\x9E\x81\xE5\xB0\x8F\xE5\x80\xBC\xE6\x90\x9C\xE7\xB4\xA2\xE7\xAE\x97\xE6\xB3\x95minimax\xE7\xBB\xB4\xE5\x9F\xBA\xE7\x99\xBE\xE7\xA7\x91)
-               * [2.负极大值算法（Negamax）（<a href="https://en.wikipedia.org/wiki/Negamax" rel="nofollow">维基百科</a>）](#2\xE8\xB4\x9F\xE6\x9E\x81\xE5\xA4\xA7\xE5\x80\xBC\xE7\xAE\x97\xE6\xB3\x95negamax\xE7\xBB\xB4\xE5\x9F\xBA\xE7\x99\xBE\xE7\xA7\x91)
-               * [3. <strong>$$lpha$$-$$eta$$</strong> 剪枝算法（Alpha-beta pruning）（<a href="https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning" rel="nofollow">维基百科</a>）](#3-alpha-beta-\xE5\x89\xAA\xE6\x9E\x9D\xE7\xAE\x97\xE6\xB3\x95alpha-beta-pruning\xE7\xBB\xB4\xE5\x9F\xBA\xE7\x99\xBE\xE7\xA7\x91)
-            * [3.缺陷以及优化](#3\xE7\xBC\xBA\xE9\x99\xB7\xE4\xBB\xA5\xE5\x8F\x8A\xE4\xBC\x98\xE5\x8C\x96)
-               * [1.运算时间复杂度](#1\xE8\xBF\x90\xE7\xAE\x97\xE6\x97\xB6\xE9\x97\xB4\xE5\xA4\x8D\xE6\x9D\x82\xE5\xBA\xA6)
-               * [2.算杀](#2\xE7\xAE\x97\xE6\x9D\x80)
-               * [3.学习模块](#3\xE5\xAD\xA6\xE4\xB9\xA0\xE6\xA8\xA1\xE5\x9D\x97)
-            * [4.总结](#4\xE6\x80\xBB\xE7\xBB\x93)
-            * [5.参考资料(特别感谢)](#5\xE5\x8F\x82\xE8\x80\x83\xE8\xB5\x84\xE6\x96\x99\xE7\x89\xB9\xE5\x88\xAB\xE6\x84\x9F\xE8\xB0\xA2)
 
-<!-- Added by: loyio, at: Sat Jan  9 19:24:48 CST 2021 -->
+# <a name="0">gobangGameABN</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-<!--te-->
+
+
+<a href="#0">gobangGameABN</a>  
+&emsp;&emsp;&emsp;<a href="#1">1.前言</a>  
+&emsp;&emsp;&emsp;<a href="#2">2.算法介绍</a>  
+&emsp;&emsp;&emsp;&emsp;<a href="#3">1.极大极小值搜索算法（Minimax）（[维基百科](https://en.wikipedia.org/wiki/Minimax)）</a>  
+<a href="#4">  # 算自己的得分</a>  
+<a href="#5">  #  算敌人的得分， 并减去</a>  
+&emsp;&emsp;&emsp;&emsp;<a href="#6">2.负极大值算法（Negamax）（[维基百科](https://en.wikipedia.org/wiki/Negamax)）</a>  
+&emsp;&emsp;&emsp;&emsp;<a href="#7">3. **$\alpha$-$\beta$** 剪枝算法（Alpha-beta pruning）（[维基百科](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)）</a>  
+&emsp;&emsp;&emsp;<a href="#8">3.缺陷以及优化</a>  
+&emsp;&emsp;&emsp;&emsp;<a href="#9">1.运算时间复杂度</a>  
+&emsp;&emsp;&emsp;&emsp;<a href="#10">2.算杀</a>  
+&emsp;&emsp;&emsp;&emsp;<a href="#11">3.学习模块</a>  
+&emsp;&emsp;&emsp;<a href="#12">4.总结</a>  
+&emsp;&emsp;&emsp;<a href="#13">5.参考资料(特别感谢)</a>  
 
 使用负值最大算法，alpha-beta剪枝算法实现的五子棋AI程序
 
@@ -24,7 +25,7 @@
 
 
 
-#### 1.前言
+#### <a name="1">1.前言</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 对于五子棋人机对战的程序，我一开始是尝试着使用C++进行编写的，使用SDL进行界面的渲染以及事件的处理，走棋基本算法思想是通过构建一个棋形模型组，对每一步棋进行循环，比对模型组，最终得到一个存放每个位置分值的二维数组，取里面最大分值的坐标（这里主要考虑对手方的棋型），作为电脑落子点。通过不断查阅资料，通过几个星期的构建改进，最终完成了基本功能。
 
@@ -46,7 +47,7 @@
 
 
 
-#### 2.算法介绍
+#### <a name="2">2.算法介绍</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 博弈
 
@@ -74,7 +75,7 @@
 
 下面我通过几个经典算法逐步讲解我的程序
 
-##### 1.极大极小值搜索算法（Minimax）（[维基百科](https://en.wikipedia.org/wiki/Minimax)）
+##### <a name="3">1.极大极小值搜索算法（Minimax）（[维基百科](https://en.wikipedia.org/wiki/Minimax)）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 > *假设：A和Ｂ对弈，轮到Ａ走棋了，那么我们会遍历A的每一个可能走棋方法，然后对于前面A的每一个走棋方法，遍历B的每一个走棋方法，然后接着遍历A的每一个走棋方法，如此下去，直到得到确定的结果或者达到了搜索深度的限制。当达到了搜索深度限制，此时无法判断结局如何，一般都是根据当前局面的形式，给出一个得分，计算得分的方法被称为评价函数，不同游戏的评价函数差别很大，需要很好的设计。*
 >
@@ -189,7 +190,7 @@ def evaluation(is_ai):
         self_list = listSelf
         rival_list = listCPU
 
-    # 算自己的得分
+    # <a name="4">算自己的得分</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
     score_all_arr = []
     my_score = 0
     for pt in self_list:
@@ -200,7 +201,7 @@ def evaluation(is_ai):
         my_score += calcScore(m, n, 1, 1, rival_list, self_list, score_all_arr)
         my_score += calcScore(m, n, -1, 1, rival_list, self_list, score_all_arr)
 
-    #  算敌人的得分， 并减去
+    # <a name="5"> 算敌人的得分， 并减去</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
     score_all_arr_enemy = []
     enemy_score = 0
     for pt in rival_list:
@@ -218,7 +219,7 @@ def evaluation(is_ai):
 
 
 
-##### 2.负极大值算法（Negamax）（[维基百科](https://en.wikipedia.org/wiki/Negamax)）
+##### <a name="6">2.负极大值算法（Negamax）（[维基百科](https://en.wikipedia.org/wiki/Negamax)）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 如果我们使用极大极小值搜索算法，一般情况下，我们肯定是要编写两段代码分别来计算最小，最大的分值，而通过Minimax算法延伸出来的Negamax算法可以实现只用一部分代码，既处理极大节点也处理极小节点，这就是之前的评估函数为什么要传入`is_computer`参数
 
@@ -236,7 +237,7 @@ def evaluation(is_ai):
 
 
 
-##### 3. **$$\alpha$$-$$\beta$$** 剪枝算法（Alpha-beta pruning）（[维基百科](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)）
+##### <a name="7">3. **$$\alpha$$-$$\beta$$** 剪枝算法（Alpha-beta pruning）（[维基百科](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 此算法主要用于裁剪搜索树中不需要搜索的树枝，以提高运算速度，降低时间复杂度，它的基本原理是：
 
@@ -318,9 +319,9 @@ def abnAlgo(depth, alpha_value, beta_value, is_computer):
 
 
 
-#### 3.缺陷以及优化
+#### <a name="8">3.缺陷以及优化</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
-##### 1.运算时间复杂度
+##### <a name="9">1.运算时间复杂度</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 我在这里使用的数据结构过于简单，而忽略了计算效率，所以4层的计算，通常需要超过1分钟的搜索时间，太费时间了，后面会考虑优化数据结构，缩短搜索时间
 
@@ -330,7 +331,7 @@ def abnAlgo(depth, alpha_value, beta_value, is_computer):
 
 
 
-##### 2.算杀
+##### <a name="10">2.算杀</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 没有添加算杀模块
 
@@ -351,7 +352,7 @@ def abnAlgo(depth, alpha_value, beta_value, is_computer):
 
 
 
-##### 3.学习模块
+##### <a name="11">3.学习模块</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 这里可能需要牵涉到机器学习深度学习方面的内容了，通过编写一些训练程序，使用机器学习库神经网络库（比如TensorFlow、PyTorch、Keras），调用GPU算力，训练生成AI模型，从而提高电脑AI的棋力，不过，这都是后话了，如果对这些感兴趣的话，可以自行查阅资料学习
 
@@ -361,7 +362,7 @@ def abnAlgo(depth, alpha_value, beta_value, is_computer):
 
 
 
-#### 4.总结
+#### <a name="12">4.总结</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 我这个五子棋算法终究只是对经典算法的应用与结合，对于一般的不怎么下五子棋的玩家，电脑算法可以比较轻松的战胜玩家，但对于棋艺较高的玩家，这种程序在搜索层数的不高情况下，是无法下赢玩家的。我自己在测试的时候可以做到80%的胜率（我个人五子棋棋艺还算是比较高的），如果想要实现更深层次的算法，可以从上一点的学习模块入手，或参考我下面的给出的链接6
 
@@ -369,7 +370,7 @@ def abnAlgo(depth, alpha_value, beta_value, is_computer):
 
 
 
-#### 5.参考资料(特别感谢)
+#### <a name="13">5.参考资料(特别感谢)</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 
 

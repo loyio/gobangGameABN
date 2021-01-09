@@ -1,4 +1,4 @@
-
+<a name="index">**Index**</a>
 
 # <a name="0">gobangGameABN</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 

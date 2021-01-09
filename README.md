@@ -11,7 +11,7 @@
 <a href="#4">  # 算自己的得分</a>  
 <a href="#5">  #  算敌人的得分， 并减去</a>  
 &emsp;&emsp;&emsp;&emsp;<a href="#6">2.负极大值算法（Negamax）（[维基百科](https://en.wikipedia.org/wiki/Negamax)）</a>  
-&emsp;&emsp;&emsp;&emsp;<a href="#7">3. **$\alpha$-$\beta$** 剪枝算法（Alpha-beta pruning）（[维基百科](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)）</a>  
+&emsp;&emsp;&emsp;&emsp;<a href="#7">3. **![](https://latex.codecogs.com/svg.latex?\alpha)-![](https://latex.codecogs.com/svg.latex?\beta)** 剪枝算法（Alpha-beta pruning）（[维基百科](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)）</a>  
 &emsp;&emsp;&emsp;<a href="#8">3.缺陷以及优化</a>  
 &emsp;&emsp;&emsp;&emsp;<a href="#9">1.运算时间复杂度</a>  
 &emsp;&emsp;&emsp;&emsp;<a href="#10">2.算杀</a>  
@@ -237,12 +237,12 @@ def evaluation(is_ai):
 
 
 
-##### <a name="7">3. **$$\alpha$$-$$\beta$$** 剪枝算法（Alpha-beta pruning）（[维基百科](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
+##### <a name="7">3. **![](https://latex.codecogs.com/svg.latex?\alpha)-![](https://latex.codecogs.com/svg.latex?\beta)** 剪枝算法（Alpha-beta pruning）（[维基百科](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)）</a><a style="float:right;text-decoration:none;" href="#index">[Top]</a>
 
 此算法主要用于裁剪搜索树中不需要搜索的树枝，以提高运算速度，降低时间复杂度，它的基本原理是：
 
-- 当一个MIN节点的 $$\beta$$ 值 $\le$ 任何一个父节点的 $$\alpha$$ 值时，剪掉该节点的所有子节点
-- 当一个MAX节点的 $$\alpha$$ 值 $\ge$ 任何一个父节点的 $$\beta$$ 值时，剪掉该节点的所有子节点
+- 当一个MIN节点的![](https://latex.codecogs.com/svg.latex?\beta)值 $\le$ 任何一个父节点的 $$\alpha$$ 值时，剪掉该节点的所有子节点
+- 当一个MAX节点的 ![](https://latex.codecogs.com/svg.latex?\alpha) 值 $\ge$ 任何一个父节点的 $$\beta$$ 值时，剪掉该节点的所有子节点
 
 下面是来自维基百科的一张示例图
 

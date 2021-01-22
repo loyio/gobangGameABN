@@ -31,8 +31,8 @@ tableListAll = []
 
 flag = 1
 
-for i in range(cell_num + 1):
-    for j in range(cell_num + 1):
+for i in range(cell_num):
+    for j in range(cell_num):
         tableListAll.append((i, j))
 
 perfectNext = [0, 0]
@@ -195,7 +195,7 @@ while True:
                         flag = 2 if flag == 1 else 1
                     change += 1
 
-    chessBoardBG = pygame.image.load("resource/chessboard.png")
+    chessBoardBG = pygame.image.load("resource/chessboard.bmp")
     screen.blit(chessBoardBG, (0, 0))
 
     for x, y, f in listBlit:

@@ -37,7 +37,7 @@
 
 后面我又通过查询资料，基本弄明白了博弈程序几个常用的算法，为了节省设计数据结构的时间（我的C++ STL学的还不是很深入），最终选择使用Python编写这个五子棋算法程序，在界面层渲染事件处理方面我使用的是pygame模块，比较简单，我的文档就不过多介绍。
 
-![image-20201126101244354](https://loyioblog.oss-cn-beijing.aliyuncs.com/2020-11-26-021703.png)
+![image-20201126101244354](https://cdn.jsdelivr.net/gh/loyio/oss@main/blogs/2022/09/jCdrqB2020-11-26-021703.png)
 
 
 
@@ -227,7 +227,7 @@ def evaluation(is_ai):
 
 下面是维基百科上该算法的动画演示
 
-![img](https://loyioblog.oss-cn-beijing.aliyuncs.com/2020-11-25-123241.gif)
+![img](https://cdn.jsdelivr.net/gh/loyio/oss@main/blogs/2022/09/doe8wK2020-11-25-123241.gif)
 
 
 
@@ -239,12 +239,12 @@ def evaluation(is_ai):
 
 此算法主要用于裁剪搜索树中不需要搜索的树枝，以提高运算速度，降低时间复杂度，它的基本原理是：
 
-- 当一个MIN节点的 $$\beta$$ 值 $\le$ 任何一个父节点的 $$\alpha$$ 值时，剪掉该节点的所有子节点
-- 当一个MAX节点的 $$\alpha$$ 值 $\ge$ 任何一个父节点的 $$\beta$$ 值时，剪掉该节点的所有子节点
+- 当一个MIN节点的 $\beta$ 值 $\le$ 任何一个父节点的 $\alpha$ 值时，剪掉该节点的所有子节点
+- 当一个MAX节点的 $\alpha$ 值 $\ge$ 任何一个父节点的 $\beta$ 值时，剪掉该节点的所有子节点
 
 下面是来自维基百科的一张示例图
 
-![img](https://loyioblog.oss-cn-beijing.aliyuncs.com/2020-11-25-125257.png)
+![img](https://cdn.jsdelivr.net/gh/loyio/oss@main/blogs/2022/09/igK07H2020-11-25-125257.png)
 
 关于alpha-beta剪枝算法的具体解释，可以自行上网搜索，也可以点击下面的链接查看
 
